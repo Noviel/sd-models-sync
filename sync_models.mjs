@@ -40,15 +40,6 @@ async function makeLinkForFiles(fromPath, extensions, toPath) {
   }
 }
 
-// Get command line arguments
-// const [
-//   _,
-//   __,
-//   directoryPath = "Q:/ML/sd/models",
-//   targetDir = ".",
-//   ...extensions
-// ] = process.argv;
-
 try {
   const { items } = config;
   for (const { extensions, from, to } of items) {
@@ -62,9 +53,3 @@ try {
   console.err("Ooops");
   console.err(e);
 }
-
-// makeLinkForFiles(
-//   directoryPath,
-//   extensions.length > 0 ? extensions : ["safetensors"],
-//   targetDir
-// );
