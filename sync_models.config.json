@@ -1,0 +1,31 @@
+{
+  "items": [
+    {
+      "name": "sd-models",
+      "extensions": ["safetensors", "ckpt", "sha256", "yaml"],
+      "from": ["Q:/ML/sd/models"],
+      "to": [
+        "Q:/ML/tools/stable-diffusion-webui/models/Stable-diffusion",
+        "Q:/ML/tools/invokeai/models/ldm/stable-diffusion-v1"
+      ]
+    },
+    {
+      "name": "loras",
+      "extensions": ["safetensors", "pt", "sha256", "yaml"],
+      "from": ["Q:/ML/sd/lora"],
+      "to": [
+        "Q:/ML/tools/stable-diffusion-webui/models/Lora",
+        "Q:/ML/tools/invokeai/loras"
+      ]
+    },
+    {
+      "name": "textual-inversions",
+      "extensions": ["safetensors", "pt", "sha256", "yaml"],
+      "from": ["Q:/ML/sd/textual_inversions"],
+      "to": [
+        "Q:/ML/tools/stable-diffusion-webui/embeddings",
+        "Q:/ML/tools/invokeai/embeddings"
+      ]
+    }
+  ]
+}
