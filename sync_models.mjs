@@ -3,6 +3,12 @@ import { extname, join } from "path";
 
 import config from "./sync_models.config.json" assert { type: "json" };
 
+const settings = {
+  log: {
+    skipped: 'total'
+  }
+}
+
 async function listFilesWithExtensions(directoryPath, extensions) {
   try {
     const files = await readdir(directoryPath);
@@ -18,6 +24,7 @@ async function listFilesWithExtensions(directoryPath, extensions) {
 }
 
 async function makeLinkForFiles(fromPath, extensions, toPath) {
+  let skippedCount = 0;
   try {
     const files = await listFilesWithExtensions(fromPath, extensions);
     for (const file of files) {
@@ -29,7 +36,10 @@ async function makeLinkForFiles(fromPath, extensions, toPath) {
         console.log(`Created symlink for ${file}`);
       } catch (err) {
         if (err.code === "EEXIST") {
-          console.log(`Skipping ${file}: Symlink already exists`);
+          skippedCount++
+          if (settings.log.skipped === 'each') {
+            console.log(`Skipping ${file}: Symlink already exists`);
+          }
         } else {
           console.error(`Error creating symlink for ${file}:`, err);
         }
@@ -37,6 +47,9 @@ async function makeLinkForFiles(fromPath, extensions, toPath) {
     }
   } catch (err) {
     console.error("An error occurred:", err);
+  }
+  if (settings.log.skipped === 'total') {
+    console.log(`Skipped ${skippedCount} files`);
   }
 }
 
